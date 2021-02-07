@@ -1,0 +1,346 @@
+{
+	"info": {
+		"_postman_id": "7928d130-efc2-4b57-a07b-1ebf26fb0199",
+		"name": "CCCRYPT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get-user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/user",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-user-balance",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/user/balance?id_user=d74981f3-23a9-4cb9-bb86-a19f225fa827",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user",
+								"balance"
+							],
+							"query": [
+								{
+									"key": "id_user",
+									"value": "d74981f3-23a9-4cb9-bb86-a19f225fa827"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"aaaaaa\",\r\n    \"balance\":\"123.11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/user",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"balance\": 11.22\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/user?id=d74981f3-23a9-4cb9-bb86-a19f225fa",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "d74981f3-23a9-4cb9-bb86-a19f225fa"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-transfer-crypto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"offer_val\":1000,\r\n    \"offer_name\":\"eth\",\r\n    \"target_name\":\"btc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/user/crypto-transfer",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user",
+								"crypto-transfer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "crypto",
+			"item": [
+				{
+					"name": "get-crypto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/crypto",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"crypto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-crypto-volume",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/crypto/volume/?name=",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"crypto",
+								"volume",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-crypto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"eth\",\r\n    \"price\":35345.12345\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/crypto",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"crypto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-crypto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\":1671.61\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/crypto?id=83400c63-e161-495b-aaf1-2ebeb62a20a9",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"crypto"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "83400c63-e161-495b-aaf1-2ebeb62a20a9"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user-crypto",
+			"item": [
+				{
+					"name": "create-user-crypto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_user\":\"d74981f3-23a9-4cb9-bb86-a19f225fa827\",\r\n    \"id_crypto\":\"83400c63-e161-495b-aaf1-2ebeb62a20a9\",\r\n    \"value\":100.11\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/user-crypto",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user-crypto"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{ip}}:{{port}}/index",
+					"protocol": "https",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"index"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
