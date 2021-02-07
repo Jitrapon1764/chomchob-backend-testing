@@ -9,7 +9,7 @@ export class UserCryptoDB {
     //         let result = await connect.query("SELECT * from user");
     //         return result;
     //     } catch (error) {
-    //         console.log(error);
+    //         throw error
     //     }
     // }
 
@@ -24,25 +24,7 @@ export class UserCryptoDB {
             let result = await connect.query(sql, param);
             return result;
         } catch (error) {
-            console.log(error);
+            throw error
         }   
     }
-
-    // async editBalanceUserCCCYPT(id: string, balance: number) {
-    //     try {
-    //         let connect = await db.getConnection()
-    //         let sql = `
-    //         UPDATE user
-    //         SET balance = ?
-    //         WHERE id = ?;
-    //         `
-    //         let param = [balance, id]
-    //         let result = await connect.query(sql, param);
-    //         return result;
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-
 }

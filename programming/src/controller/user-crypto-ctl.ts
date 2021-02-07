@@ -13,4 +13,5 @@ export class UserCryptoController {
         let result = await userCryptoDB.createUserCryptoCCCYPT(data);
         res.json(result)
     }
+
 }

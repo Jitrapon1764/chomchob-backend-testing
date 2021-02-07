@@ -9,7 +9,7 @@ export class UserDB {
             let result = await connect.query("SELECT * from user");
             return result;
         } catch (error) {
-            console.log(error);
+            throw error
         }
     }
 
@@ -17,14 +17,14 @@ export class UserDB {
         try {
             let connect = await db.getConnection()
             let sql = `
-            INSERT INTO user(id,name,balance)
-            VALUES (?,?,?);
+            INSERT INTO user(id,name)
+            VALUES (?,?);
             `
-            let param = [data.id, data.name, data.balance]
+            let param = [data.id, data.name]
             let result = await connect.query(sql, param);
             return result;
         } catch (error) {
-            console.log(error);
+            throw error
         }
     }
 
@@ -40,26 +40,47 @@ export class UserDB {
             let result = await connect.query(sql, param);
             return result;
         } catch (error) {
-            console.log(error);
+            throw error
         }
     }
 
-    async getUserBalanceCCCYPT(id:string) {
+    async getUserMarketValueCCCYPT(id: string) {
         try {
             let connect = await db.getConnection()
             let sql = `
-            select  c.name as coin,
-                    uc.value as volume,
-                    c.price,
-                    (uc.value * c.price) as market_val
-            from user u left join (crypto c left join user_crypto uc on c.id=uc.id_crypto)  on u.id = uc.id_user
-            where u.id = ?
+            SELECT  c.name AS coin,
+                    sum(uc.value) AS volume,
+                    sum(c.price) AS crypto_current_price,
+                    sum((uc.value * c.price)) AS market_value
+            FROM user u
+            LEFT JOIN (crypto c
+                        LEFT JOIN user_crypto uc ON c.id=uc.id_crypto) ON u.id = uc.id_user
+            WHERE u.id = ?
+            GROUP BY c.name
             `
-            let param =[id]
-            let result = await connect.query(sql,param);
+            let param = [id]
+            let result = await connect.query(sql, param);
             return result;
         } catch (error) {
-            console.log(error);
+            throw error
+        }
+    }
+
+
+    async updateUserBalanceCCCYPT(id_user: string, data: any) {
+        try {
+            let connect = await db.getConnection()
+            let sql = `
+                UPDATE user_crypto uc
+                SET value = ?
+                WHERE uc.id_user = ?
+                AND uc.id_crypto = ?
+            `
+            let param = [data.volume, id_user, data.id_crypto]
+            let result = await connect.query(sql, param);
+            return result;
+        } catch (error) {
+            throw error
         }
     }
 }

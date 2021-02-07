@@ -32,19 +32,19 @@ export class UserController {
         res.json(result)
     }
 
-    async getUserBalance(req: any, res: any) {
+    async getUserMarketValue(req: any, res: any) {
         let userDB = new UserDB();
         let { id_user } = req.query;
-        let result = await userDB.getUserBalanceCCCYPT(id_user);
+        let result = await userDB.getUserMarketValueCCCYPT(id_user);
 
-        let balance: number = 0;
+        let total_market_value: number = 0;
         for (let item of result) {
-            balance += item.market_val;
+            total_market_value += item.market_value;
         }
 
         let response = {
             "coin": result,
-            "balance": balance
+            "total_market_value": total_market_value
         }
         res.json(response)
     }
@@ -65,5 +65,17 @@ export class UserController {
             result: result
         }
         res.json(response)
+    }
+
+    async editUserCryptoVolume(req: any, res: any) {
+        let userDB = new UserDB();
+        let body = req.body;
+        let id_user = req.query.id_user
+        let data = {
+            id_crypto: body.id_crypto,
+            volume: parseFloat(body.volume)
+        }
+        let result = await userDB.updateUserBalanceCCCYPT(id_user,data);
+        res.json(result)
     }
 }

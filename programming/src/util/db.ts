@@ -19,7 +19,7 @@ export class MariaDB {
             const rows = await connect.query("SELECT 1 as val");
             if (rows) console.log(`connect ${this.dbConfig.database} success`);
         } catch (error) {
-            console.log(error);
+            throw error
         }
     }
 

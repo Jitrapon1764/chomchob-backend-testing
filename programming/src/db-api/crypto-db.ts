@@ -9,7 +9,7 @@ export class CryptoDB {
             let result = await connect.query("SELECT * from crypto");
             return result;
         } catch (error) {
-            console.log(error);
+            throw error
         }
     }
 
@@ -24,7 +24,7 @@ export class CryptoDB {
             let result = await connect.query(sql, param);
             return result;
         } catch (error) {
-            console.log(error);
+            throw error
         }
     }
 
@@ -40,7 +40,7 @@ export class CryptoDB {
             let result = await connect.query(sql, param);
             return result;
         } catch (error) {
-            console.log(error);
+            throw error
         }
     }
 
@@ -48,7 +48,10 @@ export class CryptoDB {
         try {
             let connect = await db.getConnection()
             let sql = `
-            select c.name ,SUM(uc.value) as volume,(c.price*uc.value ) as market_value
+            select  c.name ,
+                    SUM(uc.value) as volume,
+                    c.price as crypto_current_price,
+                    (c.price*uc.value ) as market_value
             from crypto c left join user_crypto uc on c.id=uc.id_crypto
             where c.name LIKE  ?
             GROUP BY   c.name
@@ -57,7 +60,7 @@ export class CryptoDB {
             let result = await connect.query(sql,param);
             return result;
         } catch (error) {
-            console.log(error);
+            throw error
         }
     }
 
@@ -73,7 +76,7 @@ export class CryptoDB {
             let result = await connect.query(sql,param);
             return result;
         } catch (error) {
-            console.log(error);
+            throw error
         }
     }
 }
