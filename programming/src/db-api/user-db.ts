@@ -13,6 +13,20 @@ export class UserDB {
         }
     }
 
+    async getUserByIdCCCYPT(id_user:string) {
+        try {
+            let connect = await db.getConnection()
+            let sql = `
+                SELECT * from user u where u.id = ?
+            `
+            let param = [id_user]
+            let result = await connect.query(sql,param);
+            return result;
+        } catch (error) {
+            throw error
+        }
+    }
+
     async createUserCCCYPT(data: any) {
         try {
             let connect = await db.getConnection()

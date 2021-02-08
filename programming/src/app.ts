@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { MariaDB } from './util/db'
+import { Logger } from './util/logger';
 const router = require('./router/main-route')
 const https = require("https");
 const fs = require("fs");
@@ -9,6 +10,8 @@ const cors = require('cors')
 const addRequestId = require('express-request-id')();
 const db = new MariaDB();
 const app = express();
+let _logger = new Logger()
+
 
 //===content-security-policy=====
 const cspPolicy = {
@@ -45,7 +48,7 @@ function start_server() {
     };
     var server = https.createServer(options, app);
     server.listen(port, () => {
-        console.log(`server running in port ${port}`);
+        _logger.logger.info(`running in port ${port}`)
     });
 }
 

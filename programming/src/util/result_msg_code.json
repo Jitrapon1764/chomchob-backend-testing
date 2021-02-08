@@ -1,0 +1,178 @@
+{
+    "20000": {
+        "http_status": 200,
+        "result_code": "20000",
+        "result_message": "Success",
+        "more_info": "Request successful",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "20100": {
+        "http_status": 201,
+        "result_code": "20100",
+        "result_message": "Created success",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "40000": {
+        "http_status": 400,
+        "result_code": "40000",
+        "result_message": "Bad Request",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "40101": {
+        "http_status": 401,
+        "result_code": "40101",
+        "result_message": "Access denied",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "40102": {
+        "http_status": 401,
+        "result_code": "40102",
+        "result_message": "Session expired",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "40103": {
+        "http_status": 401,
+        "result_code": "40103",
+        "result_message": "OTP expired",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "40300": {
+        "http_status": 403,
+        "result_code": "40300",
+        "result_message": "Missing or invalid parameter",
+        "more_info": "Missing or invalid parameter:",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "40301": {
+        "http_status": 403,
+        "result_code": "40301",
+        "result_message": "Data existed",
+        "more_info": "Data existed",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "40302": {
+        "http_status": 403,
+        "result_code": "40302",
+        "result_message": "Invalid Confirm Password.",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "40400": {
+        "http_status": 404,
+        "result_code": "40400",
+        "result_message": "Unknown URL",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "40401": {
+        "http_status": 404,
+        "result_code": "40401",
+        "result_message": "Data not found",
+        "more_info": "Data not found",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "40900": {
+        "http_status": 409,
+        "result_code": "40900",
+        "result_message": "Data already existed",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "40901": {
+        "http_status": 409,
+        "result_code": "40901",
+        "result_message": "Request could not be complated",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "42200": {
+        "http_status": 422,
+        "result_code": "42200",
+        "result_message": "Validation errors",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "50000": {
+        "http_status": 500,
+        "result_code": "50000",
+        "result_message": "System Error",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "50001": {
+        "http_status": 500,
+        "result_code": "50001",
+        "result_message": "DB error",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "50002": {
+        "http_status": 500,
+        "result_code": "50002",
+        "result_message": "Connection timeout",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "50003": {
+        "http_status": 500,
+        "result_code": "50003",
+        "result_message": "Connection error",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "50100": {
+        "http_status": 501,
+        "result_code": "50100",
+        "result_message": "Invalid URL structure",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "50300": {
+        "http_status": 503,
+        "result_code": "50300",
+        "result_message": "Service busy",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "50301": {
+        "http_status": 503,
+        "result_code": "50301",
+        "result_message": "Service unavailable",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    },
+    "50400": {
+        "http_status": 504,
+        "result_code": "50400",
+        "result_message": "Gateway timeout error",
+        "more_info": "",
+        "processsing_time": 0,
+        "result_data": []
+    }
+}

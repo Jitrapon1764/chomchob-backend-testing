@@ -1,4 +1,4 @@
-
+import { Logger } from './logger';
 const mariadb = require('mariadb');
 
 export class MariaDB {
@@ -14,11 +14,15 @@ export class MariaDB {
     }
 
     async startDB() {
+        const _logger = new Logger()
         try {
             let connect = await this.getConnection();
             const rows = await connect.query("SELECT 1 as val");
-            if (rows) console.log(`connect ${this.dbConfig.database} success`);
+            if (rows) {
+                _logger.logger.info(`connect DB:${this.dbConfig.database} success`)
+            }
         } catch (error) {
+            _logger.logger.info(`connect DB:${this.dbConfig.database} fail`)
             throw error
         }
     }
