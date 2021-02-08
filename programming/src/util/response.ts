@@ -64,6 +64,7 @@ export class Response{
             _logger.logger.info(`return_status:${resCode.result_code}`)
             res.status(http_status).json(ret);
         } catch (err) {
+            _logger.logger.error(`return_status:${resCode.result_code}`)
             res.status(500).json(err);
         }
     }

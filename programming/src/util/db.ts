@@ -1,29 +1,18 @@
 import { Logger } from './logger';
 const mariadb = require('mariadb');
-
+const config  = require('./config')
 export class MariaDB {
-
-    //must secret
-    dbConfig = {
-        host: 'ggdbtest.cmq0ofvvelm5.us-east-2.rds.amazonaws.com',
-        port: 3306,
-        user: 'admin',
-        password: 'Jitrapon1764',
-        connectionLimit: 5,
-        database: "CCCRYPT"
-    }
 
     async startDB() {
         const _logger = new Logger()
         try {
             let connect = await this.getConnection();
             const rows = await connect.query("SELECT 1 as val");
-            if (rows) {
-                _logger.logger.info(`connect DB:${this.dbConfig.database} success`)
+            if (connect && rows) {
+                _logger.logger.info(`connect DB:${config.database} success`)
             }
         } catch (error) {
-            _logger.logger.info(`connect DB:${this.dbConfig.database} fail`)
-            throw error
+            _logger.logger.error(`connect DB:${config.database} fail`)
         }
     }
 
@@ -31,11 +20,11 @@ export class MariaDB {
         let connect: any;
         let pool: any;
         try {
-            pool = await mariadb.createPool(this.dbConfig);
+            pool = await mariadb.createPool(config);
             connect = await pool.getConnection("CCCRYPT");
             return connect
         } catch (error) {
-
+            throw error
         } finally {
             if (connect) await pool.end()
         }
