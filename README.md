@@ -17,16 +17,40 @@ This simple wallet api project running on AWS EC2
             "name":$string,
         }
       ``` 
-  - Admin can increase and decrease user cryptocurrency balance.  
-      >edit user's volume of cryptocurrency for increase and decrease user cryptocurrency balance  
+  - Admin can get all user 
       ```
-        Postman-collection: user-crypto/update-user-volume 
+        Postman-collection: user/get-user-all  
+        Method: GET
+        
+        Url: https://{{ip}}:{{port}}/user/all
+      ``` 
+  - Admin can get user market value 
+     >calculate from multiply of volume of cryptocurrency and cryptocurrency current price 
+      ```
+        Postman-collection: user/get-user-market-value  
+        Method: GET
+        
+        Url: https://{{ip}}:{{port}}/user/market-value?id_user=${id_user}
+      ```   
+  - Admin can edit volume of cryptocurrency in user wallet
+      ```
+        Postman-collection: user/edit-user-crypto-volume  
         Method: PUT
         
-        Url: https://{{ip}}:{{port}}/user-crypto?id={$id_user}
+        Url: https://{{ip}}:{{port}}/user/crypto-volume?id_user=${id_user}
         body:{
-             "id_crypto": $string,
-             "volume": $decimal
+            "id_crypto": $string,
+            "volume": $declmal
+        }
+      ```        
+  - Admin can increase and decrease user cryptocurrency balance.  
+      ```
+        Postman-collection: user/edit-user-balance
+        Method: PUT
+        
+        Url: https://{{ip}}:{{port}}/user/balance?id=${id_user}
+        body:{
+             "balance": $string,
         }
       ```
   - Admin can see all total balance of all cryptocurrency.
@@ -37,9 +61,9 @@ This simple wallet api project running on AWS EC2
         
         Url: https://{{ip}}:{{port}}/crypto
       ```   
-      >get all volume of cryptocurrency in market 
+      >get total volume of cryptocurrency in market 
       ```
-        Postman-collection: crypto/get-crypto-volume  
+        Postman-collection: crypto/get-crypto-volume
         Method: GET
         
         Url: https://{{ip}}:{{port}}/crypto/volume/?name=${name-crypto}
