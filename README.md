@@ -11,6 +11,7 @@
    - container docker run on AWS(EC2)  
      - [source code](https://github.com/Jitrapon1764/chomchob-backend-testing/tree/master/programming)    
      - [postman collection and environment](https://github.com/Jitrapon1764/chomchob-backend-testing/tree/master/postman)
+     >run on local requires .env file (contact me)  
 
 ### Ability of simple wallet
   - Admin can create user 
