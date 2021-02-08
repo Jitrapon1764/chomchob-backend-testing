@@ -9,7 +9,7 @@
 			"name": "user",
 			"item": [
 				{
-					"name": "get-user",
+					"name": "get-user-all",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -26,38 +26,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{ip}}:{{port}}/user",
-							"protocol": "https",
-							"host": [
-								"{{ip}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"user"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get-user-balance",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{ip}}:{{port}}/user/balance?id_user=d74981f3-23a9-4cb9-bb86-a19f225fa827",
+							"raw": "https://{{ip}}:{{port}}/user/all",
 							"protocol": "https",
 							"host": [
 								"{{ip}}"
@@ -65,12 +34,81 @@
 							"port": "{{port}}",
 							"path": [
 								"user",
-								"balance"
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-user-by-id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/user?id=322e7f1c-5d91-432a-b886-e763e573b50c",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "322e7f1c-5d91-432a-b886-e763e573b50c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-user-market-value",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/user/market-value?id_user=322e7f1c-5d91-432a-b886-e763e573b50c",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user",
+								"market-value"
 							],
 							"query": [
 								{
 									"key": "id_user",
-									"value": "d74981f3-23a9-4cb9-bb86-a19f225fa827"
+									"value": "322e7f1c-5d91-432a-b886-e763e573b50c"
 								}
 							]
 						}
@@ -84,7 +122,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"aaaaaa\",\r\n    \"balance\":\"123.11\"\r\n}",
+							"raw": "{\r\n    \"name\":\"ggame\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -100,40 +138,6 @@
 							"port": "{{port}}",
 							"path": [
 								"user"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update-user",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"balance\": 11.22\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{ip}}:{{port}}/user?id=d74981f3-23a9-4cb9-bb86-a19f225fa",
-							"protocol": "https",
-							"host": [
-								"{{ip}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"user"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "d74981f3-23a9-4cb9-bb86-a19f225fa"
-								}
 							]
 						}
 					},
@@ -163,6 +167,76 @@
 							"path": [
 								"user",
 								"crypto-transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit-user-crypto-volume",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_crypto\": \"9c7f5603-722a-4e9a-b611-ad3235a19397\",\r\n    \"volume\":22\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/user/crypto-volume?id_user=d74981f3-23a9-4cb9-bb86-a19f225fa827",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user",
+								"crypto-volume"
+							],
+							"query": [
+								{
+									"key": "id_user",
+									"value": "d74981f3-23a9-4cb9-bb86-a19f225fa827"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit-user-balance",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"balance\":30000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ip}}:{{port}}/user/balance?id=322e7f1c-5d91-432a-b886-e763e573b50c",
+							"protocol": "https",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user",
+								"balance"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "322e7f1c-5d91-432a-b886-e763e573b50c"
+								}
 							]
 						}
 					},
@@ -293,7 +367,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_user\":\"d74981f3-23a9-4cb9-bb86-a19f225fa827\",\r\n    \"id_crypto\":\"83400c63-e161-495b-aaf1-2ebeb62a20a9\",\r\n    \"value\":100.11\r\n}",
+							"raw": "{\r\n    \"id_user\":\"322e7f1c-5d91-432a-b886-e763e573b50c\",\r\n    \"id_crypto\":\"83400c63-e161-495b-aaf1-2ebeb62a20a9\",\r\n    \"value\":33\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
