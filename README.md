@@ -117,7 +117,7 @@
               "target_name":$string"
         }
 # Database
- ![ Database in form of model from sequelize.](https://github.com/Jitrapon1764/chomchob-backend-testing/tree/master/database)
+   [ Database in form of model from sequelize.](https://github.com/Jitrapon1764/chomchob-backend-testing/tree/master/database)
 ## Entity Relationship Diagram
  ![ERD](https://github.com/Jitrapon1764/chomchob-backend-testing/blob/master/database/Database%20ER%20diagram.jpeg)
  
