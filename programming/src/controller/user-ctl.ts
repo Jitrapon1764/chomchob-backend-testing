@@ -15,12 +15,37 @@ export class UserController {
             _logger.logger.info(_req)
             let userDB = new UserDB();
             let result = await userDB.getUserCCCYPT();
+
+            for (let item of result) {
+                item.balance = `${commonClass.formatMoney(item.balance)} usd`
+            }
+
             await _response.response(20000, result, res)
         } catch (error) {
             await _response.response(50000, error, res)
         }
 
     }
+
+    async getUserById(req: any, res: any) {
+        try {
+            let _logger = new Logger()
+            let _req = `${req.method} ${req.originalUrl}`
+            _logger.logger.info(_req)
+            let userDB = new UserDB();
+            let { id } = req.query
+            let result = await userDB.getUserByIdCCCYPT(id);
+
+            let response = result[0]
+            response.balance = `${commonClass.formatMoney(response.balance)} usd`
+
+            await _response.response(20000, response, res)
+        } catch (error) {
+            await _response.response(50000, error.message, res)
+        }
+
+    }
+
 
     async createUser(req: any, res: any) {
         try {
@@ -35,6 +60,7 @@ export class UserController {
                 balance: parseFloat(body.balance)
             }
             let result = await userDB.createUserCCCYPT(data);
+
             await _response.response(20100, result, res)
         } catch (error) {
             await _response.response(50000, error, res)
@@ -70,12 +96,15 @@ export class UserController {
             let total_market_value: number = 0;
             for (let item of result) {
                 total_market_value += item.market_value;
+                item.crypto_current_price = `${commonClass.formatMoney(item.crypto_current_price)} usd`
+                item.market_value = `${commonClass.formatMoney(item.market_value)} usd`
             }
 
             let response = {
                 "coin": result,
-                "total_market_value": total_market_value
+                "total_market_value": `${commonClass.formatMoney(total_market_value)} usd`
             }
+
             await _response.response(20000, response, res)
         } catch (error) {
             await _response.response(50000, error, res)

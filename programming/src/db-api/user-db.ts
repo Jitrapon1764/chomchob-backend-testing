@@ -17,7 +17,7 @@ export class UserDB {
         try {
             let connect = await db.getConnection()
             let sql = `
-                SELECT * from user u where u.id = ?
+                SELECT u.name,u.balance from user u where u.id = ?
             `
             let param = [id_user]
             let result = await connect.query(sql,param);

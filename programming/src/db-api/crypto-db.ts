@@ -49,7 +49,7 @@ export class CryptoDB {
             let connect = await db.getConnection()
             let sql = `
             select  c.name ,
-                    SUM(uc.value) as volume,
+                    SUM(uc.value) as market_volume,
                     c.price as crypto_current_price,
                     (c.price*uc.value ) as market_value
             from crypto c left join user_crypto uc on c.id=uc.id_crypto

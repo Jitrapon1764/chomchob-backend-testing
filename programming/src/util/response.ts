@@ -57,7 +57,7 @@ export class Response{
             var http_status = resCode.http_status;
             let ret = {
                 resultCode: resCode.result_code,
-                resultDescription: resCode.more_info,
+                resultDescription: resCode.more_info || resCode.result_message ,
                 developerMessage: custom?.devMessage || '',
                 resultData: data ? data : resCode.result_data
             }

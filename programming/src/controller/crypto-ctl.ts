@@ -74,6 +74,7 @@ export class CryptoController {
             let result = await cryptoDB.getCryptoVolumeCCCYPT(name);
 
             for (let item of result) {
+                item.crypto_current_price = `${commonClass.formatMoney(item.crypto_current_price)} usd`
                 item.market_value = `${commonClass.formatMoney(item.market_value)} usd`
             }
             await _response.response(20000, result, res)
