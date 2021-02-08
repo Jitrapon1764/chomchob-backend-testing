@@ -1,9 +1,17 @@
 const { Sequelize } = require("sequelize");
+require("dotenv").config();
 
-const sequelize = new Sequelize("CCCRYPT", "admin", "Jitrapon1764", {
-  host: "ggdbtest.cmq0ofvvelm5.us-east-2.rds.amazonaws.com",
-  port: 3306,
-  dialect: "mariadb",
+let db_name = process.env.DB_NAME;
+let db_user = process.env.DB_USER;
+let db_pwd = process.env.DB_PASS;
+let db_host = process.env.DB_HOST;
+let db_port = process.env.DB_PORT;
+let db_dialect = process.env.DB_DIALACT;
+
+const sequelize = new Sequelize(db_name, db_user, db_pwd, {
+  host: db_host,
+  port: db_port,
+  dialect: db_dialect,
 });
 
 var testConnection = async () => {
