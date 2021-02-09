@@ -58,7 +58,6 @@ export class Response{
             let ret = {
                 resultCode: resCode.result_code,
                 resultDescription: resCode.more_info || resCode.result_message ,
-                developerMessage: custom?.devMessage || '',
                 resultData: data ? data : resCode.result_data
             }
             _logger.logger.info(`return_status:${resCode.result_code}`)

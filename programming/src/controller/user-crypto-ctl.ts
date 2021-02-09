@@ -12,6 +12,14 @@ export class UserCryptoController {
             _logger.logger.info(_req)
             let userCryptoDB = new UserCryptoDB();
             let body = req.body;
+
+            //validate param
+            let notExist = !body.id_user || !body.id_crypto || (!body.value && body.value != 0)
+            if (notExist || body.value < 0) {
+                await _response.response(40300, '', res)
+                return;
+            }
+
             let data = {
                 id: uuidv4(),
                 id_user: body.id_user,

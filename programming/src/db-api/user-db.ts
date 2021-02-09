@@ -13,14 +13,14 @@ export class UserDB {
         }
     }
 
-    async getUserByIdCCCYPT(id_user:string) {
+    async getUserByIdCCCYPT(id_user: string) {
         try {
             let connect = await db.getConnection()
             let sql = `
                 SELECT u.name,u.balance from user u where u.id = ?
             `
             let param = [id_user]
-            let result = await connect.query(sql,param);
+            let result = await connect.query(sql, param);
             return result;
         } catch (error) {
             throw error
@@ -31,10 +31,10 @@ export class UserDB {
         try {
             let connect = await db.getConnection()
             let sql = `
-            INSERT INTO user(id,name)
-            VALUES (?,?);
+            INSERT INTO user(id,name,balance)
+            VALUES (?,?,?);
             `
-            let param = [data.id, data.name]
+            let param = [data.id, data.name, data.balance]
             let result = await connect.query(sql, param);
             return result;
         } catch (error) {

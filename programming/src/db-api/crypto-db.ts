@@ -51,7 +51,7 @@ export class CryptoDB {
             select  c.name ,
                     SUM(uc.value) as market_volume,
                     c.price as crypto_current_price,
-                    (c.price*uc.value ) as market_value
+                    (c.price*uc.value) as market_value
             from crypto c left join user_crypto uc on c.id=uc.id_crypto
             where c.name LIKE  ?
             GROUP BY   c.name

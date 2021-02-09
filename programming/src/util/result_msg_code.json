@@ -51,7 +51,7 @@
         "http_status": 403,
         "result_code": "40300",
         "result_message": "Missing or invalid parameter",
-        "more_info": "Missing or invalid parameter:",
+        "more_info": "Missing or invalid parameter",
         "processsing_time": 0,
         "result_data": []
     },
