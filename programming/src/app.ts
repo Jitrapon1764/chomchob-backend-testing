@@ -11,6 +11,8 @@ const addRequestId = require('express-request-id')();
 const db = new MariaDB();
 const app = express();
 let _logger = new Logger()
+const cron = require("node-cron");
+require('dotenv').config()
 
 
 //===content-security-policy=====
@@ -31,6 +33,10 @@ start_server();
 //=======================
 
 db.startDB()
+const timeJobs = Number(process.env.DB_TIMECON || 20);
+cron.schedule(`*/${timeJobs} * * * *`, function () {
+    db.checkConnectDB(timeJobs);
+})
 
 app.get('/index', localCSP, (req, res) => {
     res.send(`Hi CCCRYPT. `);

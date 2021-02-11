@@ -1,6 +1,5 @@
 const { createLogger, format, transports } = require('winston');
 const path = require('path');
-// const env = process.env.NODE_ENV || 'development';
 export class Logger {
     getStackInfo() {
         // get call stack, and analyze it
@@ -30,11 +29,9 @@ export class Logger {
     }
 
     logger = createLogger({
-        // change level if in dev environment versus production
-        // level: env === 'production' ? 'info' : 'debug',
         format: format.combine(
             format.label({ label: this.getStackInfo() }),
-            format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' })
+            format.timestamp({ format: 'YYYY-MM-DD HH:mm:ssZZ' })
         ),
         transports: [
             new transports.Console({
