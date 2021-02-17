@@ -6,7 +6,11 @@ const { v4: uuidv4 } = require('uuid');
 let commonClass = new CommonClass()
 import { Response } from '../util/response'
 import { Logger } from '../util/logger';
+import { MariaDB } from '../util/db';
+import { UserCryptoDB } from '../db-api/user-crypto-db';
 let _response = new Response
+const db = new MariaDB();
+
 export class UserController {
     async getUser(req: any, res: any) {
         try {
@@ -243,4 +247,136 @@ export class UserController {
         }
     }
 
+    async transferCrypto(req: any, res: any) {
+        let _logger = new Logger()
+        let cryptoDB = new CryptoDB()
+        let userDB = new UserDB();
+        let userCryptoDB = new UserCryptoDB();
+
+        let connect: any
+        try {
+            let _req = `${req.method} ${req.originalUrl}`
+            _logger.logger.info(_req)
+            let { id_user } = req.query;
+            let { offer_val, offer_name, target_name, target_id_user } = req.body;
+
+            let get_user_offer = await userDB.getUserMarketValueCCCYPT(id_user);
+            let offer = await cryptoDB.getCryptoByNameCCCYPT(offer_name)
+            let target = await cryptoDB.getCryptoByNameCCCYPT(target_name)
+            let rate = offer[0].price / target[0].price
+
+
+            let volume_after_offer = 0;
+            let volume_after_offer_exchange = 0;
+            let exchange_value = rate * offer_val
+            let offerHaveCoin = false;
+            let targetHaveCoin = false;
+
+            for (let item of get_user_offer) {
+                if (item.coin == offer_name) {
+                    if (item.volume < offer_val) {
+                        await _response.response(40300, 'your coin is not enough', res)
+                        return;
+                    }
+                    volume_after_offer = item.volume - offer_val
+                }
+                if (item.coin == target_name) {
+                    offerHaveCoin = true
+                    volume_after_offer_exchange = item.volume + exchange_value
+                }
+
+            }
+
+            let get_user_target = await userDB.getUserMarketValueCCCYPT(target_id_user);
+            for (let item of get_user_target) {
+                if (item.coin == target_name) {
+                    if (item.volume < exchange_value) {
+                        await _response.response(40300, 'target coin is not enough', res)
+                        return;
+                    }
+                }
+            }
+
+            let target_user_coin;
+            let target_user_coin_exchange;
+
+            for (let item of get_user_target) {
+                if (item.coin == target_name) {
+                    target_user_coin = item
+                }
+                if (item.coin == offer_name) {
+                    targetHaveCoin = true
+                    target_user_coin_exchange = item
+                }
+            }
+
+
+            // start transaction--------------------------------------------------------------------------------
+            connect = await db.getConnection();
+            await connect.beginTransaction();
+
+            //offer_user-----------------------------------------------
+            let update_volume_offer: any = {
+                volume: volume_after_offer,
+                id_crypto: offer[0]?.id
+            }
+            let update_offer_user = await userDB.updateUserBalanceCCCYPT(id_user, update_volume_offer);
+
+
+            if (offerHaveCoin) {
+                //have coin -> update
+                let update_volume_offer_exchange: any = {
+                    volume: volume_after_offer_exchange,
+                    id_crypto: target[0]?.id
+                }
+                let update_offer_user_receive = await userDB.updateUserBalanceCCCYPT(id_user, update_volume_offer_exchange);
+            } else {
+                //dont have coin -> create
+                let data = {
+                    id: uuidv4(),
+                    id_user: id_user,
+                    id_crypto: target[0]?.id,
+                    value: volume_after_offer_exchange,
+                }
+                let create_offer_user_receive = await userCryptoDB.createUserCryptoCCCYPT(data);
+            }
+
+            //target_user----------------------------------------------
+
+            let update_target_volume: any = {
+                volume: (target_user_coin?.volume) - exchange_value,
+                id_crypto: target[0]?.id
+            }
+            let update_target_user_receive = await userDB.updateUserBalanceCCCYPT(target_id_user, update_target_volume);
+
+
+            if (targetHaveCoin) {
+                //have coin -> update
+                let update_volume_target_exchange: any = {
+                    volume: (target_user_coin_exchange?.volume) + offer_val,
+                    id_crypto: offer[0]?.id
+                }
+                let update_target_user = await userDB.updateUserBalanceCCCYPT(target_id_user, update_volume_target_exchange);
+            } else {
+                //dont have coin -> create
+                let data = {
+                    id: uuidv4(),
+                    id_user: target_id_user,
+                    id_crypto: offer[0]?.id,
+                    value: offer_val,
+                }
+                let create_target_user = await userCryptoDB.createUserCryptoCCCYPT(data);
+            }
+
+            // commit tran--------------------------------------------------------------------------------------------
+            await connect.commit();
+            await _response.response(20000, '', res)
+
+        } catch (error) {
+            await connect.rollback();
+
+            console.log(error);
+        }
+
+    }
 }

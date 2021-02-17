@@ -52,11 +52,12 @@ function start_server() {
         key: privateKey,
         cert: certificate
     };
-    var server = https.createServer(options, app);
+    const server = https.createServer(options, app);
     server.listen(port, () => {
         _logger.logger.info(`running in port ${port}`)
     });
 }
+
 
 function normalizePort(val: string) {
     var port = parseInt(val, 10);

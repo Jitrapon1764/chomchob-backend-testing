@@ -2,7 +2,10 @@ import { UserCryptoDB } from '../db-api/user-crypto-db'
 const { v4: uuidv4 } = require('uuid');
 import { Response } from '../util/response'
 import { Logger } from '../util/logger';
+import { CommonClass } from '../util/class';
 let _response = new Response
+let commonClass = new CommonClass()
+
 export class UserCryptoController {
 
     async createUserCrypto(req: any, res: any) {
@@ -26,8 +29,25 @@ export class UserCryptoController {
                 id_crypto: body.id_crypto,
                 value: parseFloat(body.value)
             }
-            let result = await userCryptoDB.createUserCryptoCCCYPT(data);
-            await _response.response(20100, result, res)
+            //get
+            let getUserCrypto = await userCryptoDB.getUserCryptoCCCYPT(body.id_user, body.id_crypto)
+
+            let result
+            if (commonClass.isEmpty(getUserCrypto)) {
+                //dont have -> create
+                result = await userCryptoDB.createUserCryptoCCCYPT(data);
+            } else {
+                //have -> update
+                let dataToUpdate = {
+                    value: getUserCrypto[0].value + body.value,
+                    id: getUserCrypto[0].id
+                }
+                result = await userCryptoDB.updateUserCryptoCCCYPT(dataToUpdate.id, dataToUpdate.value);
+            }
+
+            await _response.response(20000, result, res)
+
+
         } catch (error) {
             await _response.response(50000, error, res)
         }

@@ -10,5 +10,6 @@ router.get("/user/market-value",userController.getUserMarketValue);
 router.post("/user",userController.createUser);
 router.post("/user/crypto-transfer",userController.userTransferCrypto);
 router.put("/user/crypto-volume",userController.editUserCryptoVolume);
+router.post("/user/transfer",userController.transferCrypto);
 
 module.exports = router
